@@ -5,12 +5,21 @@ class ApplicationController < ActionController::Base
 
 	respond_to :json
 
-	def authenticate_user_from_token!
-    user_token = params[:user_token].presence
-    user       = user_token && User.find_by_authentication_token(user_token.to_s)
- 
-    if user
-      sign_in user, store: false
+  private
+  # http://blog.envylabs.com/post/75521798481/token-based-authentication-in-rails
+  def authenticate
+    authenticate_token || render_unauthorized
+  end
+  def authenticate_token
+    authenticate_with_http_token do |token, options|
+      user = User.find_by_authentication_token(token.to_s)
+      if user
+        sign_in user, store: false
+      end
     end
+  end
+  def render_unauthorized
+    self.headers['WWW-Authenticate'] = 'Token realm="Application"'
+    render json: 'Unauthorized', status: 401
   end
 end

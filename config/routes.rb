@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   get 'home/index'
 
+  devise_for :users
+
 	namespace :api do
 		namespace :v1 do
 			resource :sessions
+      resources :checkpoints
 		end
 	end
 
@@ -12,7 +15,6 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-	root 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

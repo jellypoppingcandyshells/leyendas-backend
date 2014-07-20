@@ -1,5 +1,9 @@
 class Api::V1::SessionsController < ApplicationController
 
+	before_filter :authenticate, except: [:create]
+	# before_filter :authenticate_user_from_token! #, except: [:create]
+	# before_action :authenticate_user!, except: [:create]
+
 	include Devise::Controllers::Helpers
 
 	# POST /api/v1/sessions
@@ -24,8 +28,12 @@ class Api::V1::SessionsController < ApplicationController
 	end
 
 	# DELETE /api/v1/sessions
-	def destroy
+	# def destroy
+	# end
 
+	# GET /api/v1/sessions
+	def show
+		render json: {time_now: Time.now}
 	end
 
 	protected
