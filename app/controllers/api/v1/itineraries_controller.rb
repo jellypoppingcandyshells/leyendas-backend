@@ -15,6 +15,11 @@ class Api::V1::ItinerariesController < ApplicationController
 			render json: {message: 'Something went wrong', errors: itinerary.errors, errors_full_messages: itinerary.errors.full_messages}
 		end
 	end
+	def update
+		itinerary = Itinerary.find(params[:id])
+		itinerary.update_attributes(itinerary_params)
+		render json: itinerary
+	end
 	def destroy
 		itinerary = Itinerary.find(params[:id])
 		itinerary.destroy
