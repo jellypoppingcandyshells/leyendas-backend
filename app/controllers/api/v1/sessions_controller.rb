@@ -27,17 +27,7 @@ class Api::V1::SessionsController < ApplicationController
 		end
 	end
 
-	# DELETE /api/v1/sessions
-	# def destroy
-	# end
-
-	# GET /api/v1/sessions
-	def show
-		render json: {time_now: Time.now}
-	end
-
 	protected
-
 	def session_params
 		params.require(:user).permit(:email, :password)
 	end
