@@ -26,10 +26,8 @@ class Api::V1::ItinerariesController < ApplicationController
 		head :no_content
 	end
 
-
 	private
 	def itinerary_params
 		params.require(:itinerary).permit(:name)
 	end
-
 end
