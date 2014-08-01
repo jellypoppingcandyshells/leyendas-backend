@@ -9,11 +9,11 @@ class Api::V1::CheckpointsController < ApplicationController
 	end
 	def create
 		checkpoint = Checkpoint.new(checkpoint_params)
-		if checkpoint.save
+		if checkpoint.save!
 			render json: checkpoint
 		else
-			render json: {message: 'Something went wrong', errors: checkpoint.errors, errors_full_messages: checkpoint.errors.full_messages}
-			end
+			render json: {message: 'Something went wrong', errors: checkpoint.errors.full_messages}
+		end
 	end
 	def update
 		checkpoint = Checkpoint.find(params[:id])
