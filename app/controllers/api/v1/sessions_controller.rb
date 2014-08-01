@@ -25,6 +25,8 @@ class Api::V1::SessionsController < ApplicationController
 				render json: {success: false, message: 'Wrong password'}, status: 401
 			end
 		end
+	rescue Exception => e
+		render json: {success: false, message: e.message}, status: 401
 	end
 
 	protected
