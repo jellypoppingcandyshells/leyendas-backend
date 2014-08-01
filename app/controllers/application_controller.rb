@@ -26,9 +26,6 @@ class ApplicationController < ActionController::Base
         # self.headers['WWW-Authenticate'] = 'Token realm="Application"'
         render json: 'Unauthorized', status: 401
     end
-    # def rescue_from_validation
-    #     render json: {success: false, messages: }, status, 
-    # end
     def rescue_from_parameter_missing(e)
         render json: {success: false, messages: [e.message]}, status: :unprocessable_entity
     end
